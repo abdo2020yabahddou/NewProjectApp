@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.example.newprojectapp
 
 import androidx.compose.runtime.Composable
@@ -23,9 +25,15 @@ fun Navigation(
         }
         composable(
             Screen.WelcomeScreen.route,
-            arguments = listOf(navArgument("name") { type = NavType.StringType })
+            arguments = listOf(navArgument("name") { type = NavType.StringType },
+                navArgument("lastName") { type = NavType.StringType },
+                navArgument("email") { type = NavType.StringType },
+                navArgument("password") { type = NavType.StringType })
         ) { backStackEntry ->
             val name = backStackEntry.arguments?.getString("name") ?: ""
+            val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
+            val email = backStackEntry.arguments?.getString("email") ?: ""
+            val password = backStackEntry.arguments?.getString("password") ?: ""
             WelcomeView(name, lastName, email, password, navController)
         }
 

@@ -33,8 +33,6 @@ fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
 
-    //val personalInfo = "$nameValue + lastNameValue + emailValue + passwordValue"
-
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -75,9 +73,7 @@ fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
             value = emailValue,
             singleLine = true,
             onValueChange = {
-                if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
-                    emailValue = it
-                }
+                emailValue = it
             },
             label = { Text("Email") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
@@ -89,19 +85,25 @@ fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
             value = passwordValue,
             singleLine = true,
             onValueChange = {
-                if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
-                    passwordValue = it
-                }
+                passwordValue = it
             },
             label = { Text("Password") }
         )
         Spacer(modifier = Modifier.height(16.dp))
+
+        //Enter Button
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             onClick = {
-                if (nameValue.isNotBlank() && lastNameValue.isNotBlank() && emailValue.isNotBlank() && passwordValue.isNotBlank()) {
+                if (listOf(
+                        nameValue,
+                        lastNameValue,
+                        emailValue,
+                        passwordValue
+                    ).all { it.isNotBlank() }
+                ) {
                     navController.navigate(
                         Screen.WelcomeScreen.createRoute(
                             name = nameValue.trim(),

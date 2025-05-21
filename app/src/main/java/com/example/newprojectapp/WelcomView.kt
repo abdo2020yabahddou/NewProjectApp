@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,8 +36,11 @@ fun WelcomeView(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Welcome $firstName $lastName\n, Your email is $email\n, Your password is $password",
-            style = TextStyle.Default,
+            text = """
+                   Welcome $firstName $lastName
+                   Your email is: $email
+                   Your password is: ${"*".repeat(password.length)}
+                   """.trimIndent(),
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
@@ -44,7 +48,7 @@ fun WelcomeView(
         Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = {
             navController.navigate(Screen.HomeScreen.route)
-        }, modifier = Modifier.fillMaxWidth()) {
+        }, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
             Text(text = "Exit")
         }
     }
