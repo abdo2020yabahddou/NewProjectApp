@@ -2,6 +2,7 @@ package com.example.newprojectapp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,9 +47,13 @@ fun WelcomeView(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = {
-            navController.navigate(Screen.HomeScreen.route)
-        }, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+        Button(
+            onClick = {
+                navController.navigate(Screen.HomeScreen.route)
+            }, modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
             Text(text = "Exit")
         }
     }

@@ -27,8 +27,8 @@ fun Navigation(
             Screen.WelcomeScreen.route,
             arguments = listOf(navArgument("name") { type = NavType.StringType },
                 navArgument("lastName") { type = NavType.StringType },
-                navArgument("email") { type = NavType.StringType },
-                navArgument("password") { type = NavType.StringType })
+                navArgument("My-email") { type = NavType.StringType },
+                navArgument("My-password") { type = NavType.StringType })
         ) { backStackEntry ->
             val name = backStackEntry.arguments?.getString("name") ?: ""
             val lastName = backStackEntry.arguments?.getString("lastName") ?: ""
