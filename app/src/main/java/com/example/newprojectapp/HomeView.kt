@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,25 +26,90 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun HomeView(viewModel: MyViewModel, navController: NavHostController) {
+fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
 
-    var itemValue by remember { mutableStateOf("") }
+    var nameValue by remember { mutableStateOf("") }
+    var lastNameValue by remember { mutableStateOf("") }
+    var emailValue by remember { mutableStateOf("") }
+    var passwordValue by remember { mutableStateOf("") }
+
+    //val personalInfo = "$nameValue + lastNameValue + emailValue + passwordValue"
+
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OutlinedTextField(value = itemValue, onValueChange = {
-            if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
-                itemValue = it
-            }
-        }, label = { Text("Name") })
+
+        //first Name
+        OutlinedTextField(
+            value = nameValue,
+            singleLine = true,
+            onValueChange = {
+                if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
+                    nameValue = it
+                }
+            },
+            label = { Text("First Name") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        //Last Name
+        OutlinedTextField(
+            value = lastNameValue,
+            singleLine = true,
+            onValueChange = {
+                if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
+                    lastNameValue = it
+                }
+            },
+            label = { Text("Last Name") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        //email
+        OutlinedTextField(
+            value = emailValue,
+            singleLine = true,
+            onValueChange = {
+                if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
+                    emailValue = it
+                }
+            },
+            label = { Text("Email") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        //password
+        OutlinedTextField(
+            value = passwordValue,
+            singleLine = true,
+            onValueChange = {
+                if (it.all { char -> char.isLetter() || char.isWhitespace() }) {
+                    passwordValue = it
+                }
+            },
+            label = { Text("Password") }
+        )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             onClick = {
-                if (itemValue.isNotBlank()) {
-                    navController.navigate(Screen.WelcomeScreen.createRoute(itemValue.trim()))
+                if (nameValue.isNotBlank() && lastNameValue.isNotBlank() && emailValue.isNotBlank() && passwordValue.isNotBlank()) {
+                    navController.navigate(
+                        Screen.WelcomeScreen.createRoute(
+                            name = nameValue.trim(),
+                            lastName = lastNameValue.trim(),
+                            email = emailValue.trim(),
+                            password = passwordValue.trim()
+                        )
+                    )
                 }
             },
         ) {

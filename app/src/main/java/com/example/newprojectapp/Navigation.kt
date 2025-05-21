@@ -10,8 +10,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
 @Composable
-fun Navigation(navController: NavHostController = rememberNavController()) {
-    val viewModel: MyViewModel = viewModel()
+fun Navigation(
+    navController: NavHostController = rememberNavController(),
+    lastName: String = "",
+    email: String = "",
+    password: String = ""
+) {
+    val viewModel: HomeViewModel = viewModel()
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
         composable(Screen.HomeScreen.route) {
             HomeView(viewModel, navController)
@@ -21,7 +26,7 @@ fun Navigation(navController: NavHostController = rememberNavController()) {
             arguments = listOf(navArgument("name") { type = NavType.StringType })
         ) { backStackEntry ->
             val name = backStackEntry.arguments?.getString("name") ?: ""
-            WelcomeView(name, navController)
+            WelcomeView(name, lastName, email, password, navController)
         }
 
     }

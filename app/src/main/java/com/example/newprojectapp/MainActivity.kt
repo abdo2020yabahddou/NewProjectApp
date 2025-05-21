@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.newprojectapp.ui.theme.NewProjectAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,6 +29,11 @@ class MainActivity : ComponentActivity() {
 
 
 
+//Idea of the app
+/* #1. Basic Navigation
+Simple navigation between two screens with passing values using Jetpack Compose.
+Allow entering only letters on the TextField.
+*/
 
 
 
