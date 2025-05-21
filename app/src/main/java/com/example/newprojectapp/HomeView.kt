@@ -25,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
+
 @Composable
 fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
 
@@ -32,6 +33,8 @@ fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
     var lastNameValue by remember { mutableStateOf("") }
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
+
+    val userId = java.util.UUID.randomUUID().toString()
 
 
     Column(
@@ -109,7 +112,8 @@ fun HomeView(viewModel: HomeViewModel, navController: NavHostController) {
                             name = nameValue.trim(),
                             lastName = lastNameValue.trim(),
                             email = emailValue.trim(),
-                            password = passwordValue.trim()
+                            password = passwordValue.trim(),
+                            userId = userId
                         )
                     )
                 }
